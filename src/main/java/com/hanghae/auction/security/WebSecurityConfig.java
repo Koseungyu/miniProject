@@ -30,9 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**").permitAll()
 
                 // 메인페이지 접근허용
-                .antMatchers("/index/**").permitAll()
+                .antMatchers("/products/**").permitAll()
                 // 글 조회 접근허용
-                .antMatchers("/detail.html/**").permitAll()
+                .antMatchers("/products.html/**").permitAll()
                 // api 요청 접근허용
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/").permitAll()
@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 로그인 처리(POST)
                 .loginProcessingUrl("/user/login")                            //클라이언트 쪽에서 무조건 username과 password로 보내달라고 요청해야함. 규율에 따른것.
                 // 로그인 처리 후 성공 시 url                                     //확인필요
-                .defaultSuccessUrl("/index.html")
+                .defaultSuccessUrl("/products.html")
                 // 로그인 처리 후 실패 시 url
                 .failureUrl("/user/login/error")
                 .permitAll()
