@@ -25,7 +25,6 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getPassword() {return user.getPassword();}
 
-
     @Override
     public boolean isAccountNonExpired() {
         return true;

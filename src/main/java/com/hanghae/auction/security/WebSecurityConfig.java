@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 로그인 처리(POST)
                 .loginProcessingUrl("/user/login")                            //클라이언트 쪽에서 무조건 username과 password로 보내달라고 요청해야함. 규율에 따른것.
                 // 로그인 처리 후 성공 시 url                                     //확인필요
-                .defaultSuccessUrl("/products.html")
+                .defaultSuccessUrl("/index.html")
                 // 로그인 처리 후 실패 시 url
                 .failureUrl("/user/login/error")
                 .permitAll()

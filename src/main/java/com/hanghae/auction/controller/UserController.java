@@ -29,6 +29,7 @@ public class UserController {
         return "signup";
     }
 
+
     @PostMapping("/user/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignupRequestDto requestDto) {
         System.out.println(requestDto);
