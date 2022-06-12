@@ -1,4 +1,4 @@
-package com.sparta.week6.model;
+package com.hanghae.auction.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

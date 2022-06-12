@@ -1,5 +1,6 @@
 package com.hanghae.auction.service;
 
+import com.hanghae.auction.dto.ResultResponseDto;
 import com.hanghae.auction.dto.SignupRequestDto;
 import com.hanghae.auction.model.Users;
 import com.hanghae.auction.repository.UserRepository;
@@ -15,6 +16,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
+    // username, password 저장.
     public void registerUser(SignupRequestDto requestDto) {
 
         ValidateChecker.registerValidCheck(requestDto);
@@ -29,5 +31,10 @@ public class UserService {
 
         Users user = new Users(username, password);
         userRepository.save(user);
+    }
+
+    //username 중복확인
+    public ResultResponseDto duplicateUsername(String username) {
+        return new ResultResponseDto(userRepository.existsByUsername(username));
     }
 }

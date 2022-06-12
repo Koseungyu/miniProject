@@ -15,4 +15,7 @@ public class SignupRequestDto {
         this.password = password;
         this.passwordcheck = passwordcheck;
     }
+
+    public SignupRequestDto(boolean existsByUsername) {
+    }
 }
