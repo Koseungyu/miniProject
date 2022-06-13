@@ -2,6 +2,7 @@ package com.hanghae.auction.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,6 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
         http.authorizeRequests()
+                .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()     // Preflight Request 허용해주기
 
                 // image 폴더를 login 없이 허용
                 .antMatchers("/images/**").permitAll()
@@ -52,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 로그인 처리 후 성공 시 url                                     //확인필요
                 .defaultSuccessUrl("/signup.html")
                 // 로그인 처리 후 실패 시 url
-                .failureUrl("/user/login/error")
+                .failureUrl("/user/login?error")
                 .permitAll()
                 .and()
                 // 로그아웃 기능
