@@ -21,14 +21,10 @@ public class ValidateChecker {
         // 2. 비밀번호와 비밀번호 확인이 일치하는지
         String username = signupRequestDto.getUsername();
         String password = signupRequestDto.getPassword();
-        String passwordcheck = signupRequestDto.getPasswordcheck();
 
         if (!Pattern.compile(username).matcher(username).find()) {
-            throw new IllegalArgumentException("아이디는 숫자와 영문자 조합으로 6~15자리를 사용해야합니다.");
+            throw new IllegalArgumentException("아이디는 숫자와 영문자 조합으로 6~20자리를 사용해야합니다.");
 //            /^[a-z]+[a-z0-9]{5,14}$/g;
-        }else if (!password.equals(passwordcheck)) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-//            /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/
         }
     }
 }
