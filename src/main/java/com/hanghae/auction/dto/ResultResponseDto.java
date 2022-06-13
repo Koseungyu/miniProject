@@ -8,8 +8,14 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ResultResponseDto {
     boolean result;
+    String message;
 
-    public ResultResponseDto(boolean checkedresult){
-        this.result = checkedresult;
+    public ResultResponseDto(boolean result, String message) {
+        this.result = result;
+        this.message = message;
+    }
+
+    public ResultResponseDto(boolean result) {
+        this.result = result;
     }
 }

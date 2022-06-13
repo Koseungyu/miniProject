@@ -36,6 +36,10 @@ public class UserService {
 
     //username 중복확인
     public ResultResponseDto duplicateUsername(String username) {
-        return new ResultResponseDto(userRepository.existsByUsername(username));
+        boolean result = userRepository.existsByUsername(username);
+        if (result)
+            return new ResultResponseDto(result,"중복된 아이디입니다.");
+        else
+            return new ResultResponseDto(result);
     }
 }
