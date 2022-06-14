@@ -22,7 +22,6 @@ public class ProductController {
 
     @GetMapping("/api/product/{pid}")
     public Product getProduct(@PathVariable Long pid) {
-//        Long uid = userDetails.getUser().getId();
         return ProductService.getProduct(pid);
     }
 
