@@ -17,5 +17,11 @@ public class ProductRequestDto {
 
     private String endtime;
 
-
+    public ProductRequestDto(String image, String title, Long price, String description, String endtime) {
+        this.image = image;
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.endtime = endtime;
+    }
 }
