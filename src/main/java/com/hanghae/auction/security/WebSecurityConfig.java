@@ -20,8 +20,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
-
 @Configuration
 @EnableWebSecurity // 스프링 Security 지원을 가능하게 함
 @EnableGlobalMethodSecurity(securedEnabled = true) // @Secured 어노테이션 활성화
@@ -31,10 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder encodePassword() {
         return new BCryptPasswordEncoder();
     }
-
     @Autowired
     private RestLogoutSuccessHandler restLogoutSuccessHandler;
-
     @Override
     public void configure(WebSecurity web) {
         // h2-console 사용에 대한 허용 (CSRF, FrameOptions 무시)
@@ -76,9 +72,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling();
     }
 
-    protected RestUsernamePasswordAuthenticationFilter getAuthenticationFilter() {
+    protected RestUsernamePasswordAuthenticationFilter getAuthenticationFilter(){
         RestUsernamePasswordAuthenticationFilter authFilter = new RestUsernamePasswordAuthenticationFilter();
-        try {
+        try{
             authFilter.setFilterProcessesUrl("/user/login"); // 로그인에 대한 POST 요청을 받을 url을 정의합니다. 해당 코드가 없으면 정상적으로 작동하지 않습니다.
             authFilter.setUsernameParameter("username");
             authFilter.setPasswordParameter("password");
@@ -86,7 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             authFilter.setAuthenticationSuccessHandler(successHandler());
             authFilter.setAuthenticationFailureHandler(failureHandler());
 
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
         }
         return authFilter;
@@ -95,23 +91,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-        configuration.setAllowCredentials(true);
+        configuration.addAllowedOrigin("http://test-miniproject.s3-website.ap-northeast-2.amazonaws.com/");                               // local 테스트 시
+        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
+        configuration.addExposedHeader("Authorization");
+        configuration.addAllowedOriginPattern("*"); // 배포 전 모두 허용
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
-
         return source;
     }
 
     @Bean
-    public AuthenticationSuccessHandler successHandler() {
+    public AuthenticationSuccessHandler successHandler(){
         return new RestLoginSuccessHandler();
     }
-
     @Bean
-    public AuthenticationFailureHandler failureHandler() {
+    public AuthenticationFailureHandler failureHandler(){
         return new RestLoginFailureHandler();
     }
 }

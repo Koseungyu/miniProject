@@ -21,6 +21,7 @@ public class RestUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         UsernamePasswordAuthenticationToken authenticationToken;
+
         if (request.getContentType().equals(MimeTypeUtils.APPLICATION_JSON_VALUE)){
             try{
                 AuthenticationDto authenticationDto = objectMapper.readValue(request.getReader().lines().collect(Collectors.joining()), AuthenticationDto.class);
@@ -34,6 +35,7 @@ public class RestUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
             String password = obtainPassword(request);
             authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
         }
+
         this.setDetails(request, authenticationToken);
         return this.getAuthenticationManager().authenticate(authenticationToken);
     }
