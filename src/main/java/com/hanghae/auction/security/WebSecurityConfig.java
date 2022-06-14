@@ -57,9 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 회원 관리 처리 API 전부를 login 없이 허용
                 .antMatchers("/user/**").permitAll()
                 // 그 외 어떤 요청이든 '인증'
-//                .anyRequest().authenticated();
                 .anyRequest().permitAll();
-//        .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
         // [로그인 기능]
         http.formLogin().disable();
@@ -72,9 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler(restLogoutSuccessHandler)
                 .permitAll();
         http.exceptionHandling();
-
-        // "접근 불가" 페이지 URL 설정
-//                .accessDeniedPage("/forbidden.html");
     }
 
     protected RestUsernamePasswordAuthenticationFilter getAuthenticationFilter(){
@@ -96,7 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:3000");                             // local 테스트 시
+        configuration.addAllowedOrigin("http://121.184.11.237:3000");                             // local 테스트 시
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.addExposedHeader("Authorization");
