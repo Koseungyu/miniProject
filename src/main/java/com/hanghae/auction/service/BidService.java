@@ -1,5 +1,6 @@
 package com.hanghae.auction.service;
 
+import com.hanghae.auction.dto.BidPriceRequestDto;
 import com.hanghae.auction.model.Bid;
 import com.hanghae.auction.repository.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,20 @@ public class BidService {
         this.bidRepository = bidRepository;
     }
 
-    public Long doBid(Long pid, Long uid, Long price) {
+    public BidPriceRequestDto doBid(Long pid, Long uid, Long price) {
         // Product product = productRepository.findById(pid).orElseThrow(() -> new NullPointerException("존재하지 않는 제품입니다."));
         // Users user = userRepository.findById(uid).orElseThrow(() -> new NullPointerException("존재하지 않는 제품입니다."));
         // Users user = new Users();
-        Bid bid = bidRepository.findById(1L).orElse(null);
+        Bid bid = bidRepository.findById(1L).orElse(null);      // USER AND PRODUCT를 통해 해당 경매 검색 예정
 
         if(bid == null){
-            bid = new Bid(pid, uid);
+            bid = new Bid();
         }
 
         bid.bidProduct(price);
-        bidRepository.save(bid);
-        return bid.getPrice();
+        Bid savedBid = bidRepository.save(bid);
+
+        return new BidPriceRequestDto(savedBid.getPrice());
     }
 
 }
