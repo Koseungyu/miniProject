@@ -21,7 +21,7 @@ public class UserController {
 
 
 //    // 유저네임 중복 검사 - 모달
-//    @PostMapping("/user/usernameCheck")
+//    @PostMapping("/user/?username")
 //    public ResponseDto usernameCheck(@RequestBody SignupRequestDto requestDto) {
 //        return userService.usernameCheck(requestDto);
 //    }
