@@ -12,21 +12,9 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(
-        uniqueConstraints={
-                @UniqueConstraint(
-                        name="BID_ID_A",
-                        columnNames = {"BID_ID_B", "name"}
-                )
-        }
-)
-@SequenceGenerator(
-        name = "BID_ID_A",
-        sequenceName = "BID_ID_B",
-        initialValue = 1, allocationSize = 1000)
 public class Bid {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BID_ID_A")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
 //    @OneToOne(name="USER_ID")
@@ -41,9 +29,6 @@ public class Bid {
     @Column(nullable = false)
     private Long count = 0L;
 
-    public Bid(Long pid, Long uid) {
-
-    }
 
     public void bidProduct(Long price){
         if(this.price > price)
