@@ -3,6 +3,8 @@ package com.hanghae.auction.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hanghae.auction.dto.ResponseDto;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
