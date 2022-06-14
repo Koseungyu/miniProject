@@ -36,6 +36,8 @@ dependencies {
 	// Thymeleaf 에서 springsecurity 의존성 설정
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+	testImplementation 'org.apache.httpcomponents:httpclient'
 }
 
 tasks.named('test') {
