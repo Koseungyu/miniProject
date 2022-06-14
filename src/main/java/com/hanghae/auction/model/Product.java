@@ -42,9 +42,9 @@ public class Product extends Timestamped{
     @Column(nullable = false)
     private String endtime;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name="uid")
-    private List<Users> id = new ArrayList<>();
+    private Users user;
 
 
     public Product(ProductRequestDto requestDto) {
