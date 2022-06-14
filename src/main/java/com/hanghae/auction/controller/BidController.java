@@ -15,16 +15,13 @@ public class BidController {
         this.bidService = bidService;
     }
 
-    @PostMapping("/price/{pid}")
-    public BidPriceRequestDto doBid(@PathVariable Long pid){
-        Long uid = 1L;      // TEST
-        Long price = 20L;
-        return bidService.doBid(pid, uid, price);
+    @PostMapping("/price/{pid}/user/{uid}")
+    public BidPriceRequestDto doBid(@PathVariable Long pid, @PathVariable Long uid, @RequestBody BidPriceRequestDto requestDto){
+        return bidService.doBid(pid, uid, requestDto.getPrice());
     }
 
-    @PutMapping("/price/{pid}")
-    public BidPriceRequestDto didBid(@PathVariable Long pid, @RequestBody BidPriceRequestDto requestDto){
-        Long uid = 1L;      // TEST
+    @PutMapping("/price/{pid}/user/{uid}")
+    public BidPriceRequestDto didBid(@PathVariable Long pid, @PathVariable Long uid, @RequestBody BidPriceRequestDto requestDto){
         return bidService.doBid(pid, uid, requestDto.getPrice());
     }
 
