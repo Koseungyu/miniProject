@@ -2,9 +2,9 @@ package com.hanghae.auction.controller;
 
 import com.hanghae.auction.dto.ProductRequestDto;
 import com.hanghae.auction.model.Product;
-import com.hanghae.auction.security.UserDetailsImpl;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class ProductController {
 
     @PostMapping("/api/product")
     public Product createProduct(@RequestBody ProductRequestDto requestDto) {
-        return ProductService.createProduct(requestDto);
+            return ProductService.createProduct(requestDto);
     }
 
     @DeleteMapping("/api/product/{pid}")
