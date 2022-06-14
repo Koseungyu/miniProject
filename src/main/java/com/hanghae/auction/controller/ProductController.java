@@ -2,10 +2,10 @@ package com.hanghae.auction.controller;
 
 import com.hanghae.auction.dto.ProductRequestDto;
 import com.hanghae.auction.model.Product;
-
+import com.hanghae.auction.repository.ProductRepository;
 import com.hanghae.auction.security.UserDetailsImpl;
+import com.hanghae.auction.service.ProductService;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +14,9 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class ProductController {
-    private final com.hanghae.auction.repository.ProductRepository ProductRepository;
-    private final com.hanghae.auction.service.ProductService ProductService;
+
+    private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @GetMapping("/api/product")
     public List<Product> getThumbnail() {

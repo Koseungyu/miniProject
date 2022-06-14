@@ -33,20 +33,23 @@ public class ProductService {
                 ()->new IllegalArgumentException("productId가 존재하지 않습니다."));
         return product;
     }
+
     @Transactional
     public Boolean deleteProduct(@PathVariable Long pid) {
 
         productRepository.deleteById(pid);
             return true;
-        }
+    }
 
     @Transactional
     public Product createProduct(@RequestBody ProductRequestDto requestDto, UserDetailsImpl userDetails) {
         Users user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(() -> new NullPointerException("존재하지 않은 사용자 ID입니다."));
         Product product = new Product(requestDto, user);
+
         String title= requestDto.getTitle();
         Long price= requestDto.getPrice();
         String description=requestDto.getDescription();
+
         if (price%100 !=0){
             throw new IllegalArgumentException("100원 단위로 입력해주세요.");
         }

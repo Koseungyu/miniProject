@@ -18,7 +18,7 @@ public class UserService {
     public ResponseDto registerUser(SignupRequestDto requestDto) {
 
 //        ValidateChecker.registerValidCheck(requestDto);
-
+        ResponseDto responseDto = new ResponseDto();
         Boolean result = true;
         String err_msg = "사용가능한 ID 입니다.";
         String username = requestDto.getUsername();
@@ -28,7 +28,8 @@ public class UserService {
         if (foundname.isPresent()) {
             err_msg = "중복된 ID가 존재합니다.";
             result = false;
-            return new ResponseDto(result, err_msg);
+            responseDto.setResult(false);
+            return responseDto;
         }
 
         String password = passwordEncoder.encode(requestDto.getPassword());
@@ -37,6 +38,7 @@ public class UserService {
         userRepository.save(user);
 
         ResponseDto responseDto = new ResponseDto(result, err_msg);
+
         return responseDto;
     }
 }
