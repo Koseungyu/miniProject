@@ -44,7 +44,7 @@ public class Product extends Timestamped{
 
     @ManyToOne
     @JoinColumn(name="uid")
-    private Users user;
+    private Users users;
 
 
     public Product(ProductRequestDto requestDto) {
