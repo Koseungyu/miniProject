@@ -1,6 +1,7 @@
 package com.hanghae.auction.model;
 
 
+import com.hanghae.auction.validator.BidValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,11 +18,13 @@ public class Bid {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @OneToOne(name="USER_ID")
-//    private Users user;
+    @OneToOne
+    @JoinColumn(name="USER_ID")
+    private Users user;
 
-//    @ManyToOne(name="PRODUCT_ID")
-//    private Product product;
+    @ManyToOne
+    @JoinColumn(name="PRODUCT_ID")
+    private Product product;
 
     @Column(nullable = false)
     private Long price = 0L;
@@ -29,11 +32,16 @@ public class Bid {
     @Column(nullable = false)
     private Long count = 0L;
 
+    public Bid(Users user, Product product, Long price) {
+        if(price <= 0)
+            throw new IllegalArgumentException("최저 입찰가가 잘못되었습니다.");
 
-    public void bidProduct(Long price){
-        if(this.price > price)
-            throw new IllegalArgumentException("기존 입찰가보다 적은 금액입니다.");
-        else
-            this.price = price;
+        this.user = user;
+        this.product = product;
+        this.price = price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = BidValidator.validationPrice(this.price, price);
     }
 }
