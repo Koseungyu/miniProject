@@ -1,6 +1,5 @@
 package com.hanghae.auction.security;
 
-import com.hanghae.auction.model.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

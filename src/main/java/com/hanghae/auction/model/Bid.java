@@ -41,9 +41,6 @@ public class Bid {
     @Column(nullable = false)
     private Long count = 0L;
 
-    public Bid(Long pid, Long uid) {
-
-    }
 
     public void bidProduct(Long price){
         if(this.price > price)

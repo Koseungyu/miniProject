@@ -20,7 +20,7 @@ public class BidService {
     public Long doBid(Long pid, Long uid, Long price) {
         // Product product = productRepository.findById(pid).orElseThrow(() -> new NullPointerException("존재하지 않는 제품입니다."));
         // Users user = userRepository.findById(uid).orElseThrow(() -> new NullPointerException("존재하지 않는 제품입니다."));
-//        Users user = new Users();
+        // Users user = new Users();
         Bid bid = bidRepository.findById(1L).orElse(null);
 
         if(bid == null){
