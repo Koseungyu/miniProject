@@ -1,5 +1,6 @@
 package com.hanghae.auction.model;
 
+import com.hanghae.auction.dto.ProductRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,11 +12,11 @@ import java.time.DateTimeException;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Product {
+public class Product extends Timestamped{
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long id;
+    private Long pid;
 
     @Column
     private String image;
@@ -33,5 +34,14 @@ public class Product {
     private Boolean status;
 
     @Column(nullable = false)
-    private DateTimeException Endtime;
+    private String endtime;
+
+    public Product(ProductRequestDto requestDto) {
+        this.image=requestDto.getImage();
+        this.title=requestDto.getTitle();
+        this.price=requestDto.getPrice();
+        this.description=requestDto.getDescription();
+        this.endtime=requestDto.getEndtime();
+    }
+
 }
