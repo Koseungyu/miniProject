@@ -14,10 +14,15 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
+@SequenceGenerator(
+        name = "PRODUCT_A",
+        sequenceName = "PRODUCT_B",
+        initialValue = 1, allocationSize = 50)
 public class Product extends Timestamped{
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "PRODUCT_A")
+    @Column(name = "PRODUCT_ID")
     private Long pid;
 
     @ManyToOne
@@ -42,18 +47,15 @@ public class Product extends Timestamped{
     @Column(nullable = false)
     private String endtime;
 
-    @ManyToOne
-    @JoinColumn(name="uid")
-    private Users user;
-
-
-    public Product(ProductRequestDto requestDto) {
+    public Product(ProductRequestDto requestDto, Users user) {
         this.image=requestDto.getImage();
         this.title=requestDto.getTitle();
         this.price=requestDto.getPrice();
         this.description=requestDto.getDescription();
         this.endtime=requestDto.getEndtime();
         this.status = true;
+
+        this.user = user;
     }
 
 }

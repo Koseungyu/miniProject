@@ -39,15 +39,4 @@ public class UserService {
         ResponseDto responseDto = new ResponseDto(result, err_msg);
         return responseDto;
     }
-
-//    public ResponseDto usernameCheck(SignupRequestDto requestDto) {
-//        Optional<Users> user = userRepository.findByUsername(requestDto.getUsername());
-//        if (user.isPresent()) {
-//            Boolean result = false;
-//            return new ResponseDto(result);
-//        } else {
-//            Boolean result = true;
-//            return new ResponseDto(result);
-//        }
-//    }
 }

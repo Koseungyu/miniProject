@@ -2,7 +2,10 @@ package com.hanghae.auction.service;
 
 import com.hanghae.auction.dto.ProductRequestDto;
 import com.hanghae.auction.model.Product;
+import com.hanghae.auction.model.Users;
 import com.hanghae.auction.repository.ProductRepository;
+import com.hanghae.auction.repository.UserRepository;
+import com.hanghae.auction.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,12 +13,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 
 @Service
-@RequiredArgsConstructor
 public class ProductService {
-    @Autowired
+
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
+
+    @Autowired
+    public ProductService(ProductRepository productRepository, UserRepository userRepository) {
+        this.productRepository = productRepository;
+        this.userRepository = userRepository;
+    }
 
     @Transactional
     public Product getProduct(@PathVariable Long pid) {
@@ -31,8 +41,9 @@ public class ProductService {
         }
 
     @Transactional
-    public Product createProduct(@RequestBody ProductRequestDto requestDto) {
-        Product product = new Product(requestDto);
+    public Product createProduct(@RequestBody ProductRequestDto requestDto, UserDetailsImpl userDetails) {
+        Users user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(() -> new NullPointerException("존재하지 않은 사용자 ID입니다."));
+        Product product = new Product(requestDto, user);
         String title= requestDto.getTitle();
         Long price= requestDto.getPrice();
         String description=requestDto.getDescription();
@@ -48,5 +59,13 @@ public class ProductService {
         else {
             return productRepository.save(product);
         }
+    }
+
+    public Product changeStatus(Long pid) {
+        Product product =  productRepository.findById(pid).orElseThrow(
+                ()->new IllegalArgumentException("productId가 존재하지 않습니다."));
+
+        product.setStatus(false);
+        return productRepository.save(product);
     }
 }

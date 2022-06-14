@@ -53,7 +53,7 @@ public class TestDataRunner implements ApplicationRunner {
     private void createTestData(Users user, String searchWord, Long price, String description, String endtime) throws IOException {
 
         ProductRequestDto requestDto = new ProductRequestDto("/static/images",  searchWord, price, description, endtime);
-        Product product = new Product(requestDto);
+        Product product = new Product(requestDto, user);
 
         Product savedProduct = productRepository.save(product);
 

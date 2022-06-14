@@ -13,17 +13,22 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
+@SequenceGenerator(
+        name = "BID_A",
+        sequenceName = "BID_B",
+        initialValue = 1, allocationSize = 50)
 public class Bid {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "BID_A")
+    @Column(name = "BID_ID")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name="USER_ID")
+    @ManyToOne
+    @JoinColumn
     private Users user;
 
     @ManyToOne
-    @JoinColumn(name="PRODUCT_ID")
+    @JoinColumn
     private Product product;
 
     @Column(nullable = false)
