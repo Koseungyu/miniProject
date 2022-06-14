@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.DateTimeException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -39,6 +41,11 @@ public class Product extends Timestamped{
 
     @Column(nullable = false)
     private String endtime;
+
+    @OneToMany
+    @JoinColumn(name="uid")
+    private List<Users> id = new ArrayList<>();
+
 
     public Product(ProductRequestDto requestDto) {
         this.image=requestDto.getImage();
