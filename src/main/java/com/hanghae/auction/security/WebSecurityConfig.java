@@ -21,6 +21,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.net.MalformedURLException;
+
 @Configuration
 @EnableWebSecurity // 스프링 Security 지원을 가능하게 함
 @EnableGlobalMethodSecurity(securedEnabled = true) // @Secured 어노테이션 활성화
@@ -99,7 +101,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.addExposedHeader("Authorization");
-        configuration.addAllowedOriginPattern("http://localhost:3000"); // 배포 전 모두 허용
+//        configuration.addAllowedOriginPattern("http://localhost:3000"); // 배포 전 모두 허용
         configuration.addAllowedOriginPattern("http://localhost:3001"); // 배포 전 모두 허용
         configuration.setAllowCredentials(true);
         configuration.addExposedHeader("JSESSIONID");
@@ -117,4 +119,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationFailureHandler failureHandler(){
         return new RestLoginFailureHandler();
     }
+
+
 }

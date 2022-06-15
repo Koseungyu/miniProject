@@ -19,5 +19,4 @@ public class ProductRequestDto {
     private String description;
 
     private String endtime;
-
 }

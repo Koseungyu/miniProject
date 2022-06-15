@@ -27,7 +27,6 @@ public class RestLoginSuccessHandler implements AuthenticationSuccessHandler {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
-        response.addHeader("JSESSIONID",httpSession.getId());
         response.setStatus(HttpServletResponse.SC_OK);
 
         ResponseDto responseDto = new ResponseDto();
