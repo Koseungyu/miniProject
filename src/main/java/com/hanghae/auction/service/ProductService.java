@@ -1,6 +1,7 @@
 package com.hanghae.auction.service;
 
 import com.hanghae.auction.dto.ProductRequestDto;
+import com.hanghae.auction.dto.ResponseDto;
 import com.hanghae.auction.model.Product;
 import com.hanghae.auction.model.Users;
 import com.hanghae.auction.repository.ProductRepository;
@@ -33,10 +34,12 @@ public class ProductService {
     }
 
     @Transactional
-    public Boolean deleteProduct(@PathVariable Long pid) {
+    public ResponseDto deleteProduct(@PathVariable Long pid, UserDetailsImpl userDetails) {
+        Users user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(() -> new NullPointerException("존재하지 않은 사용자 ID입니다."));
+        Product product = productRepository.findById(pid).orElseThrow(() -> new NullPointerException("존재하지 않은 제품입니다."));
 
         productRepository.deleteById(pid);
-            return true;
+        return new ResponseDto("삭제 성공하셨습니다.");
     }
 
     @Transactional

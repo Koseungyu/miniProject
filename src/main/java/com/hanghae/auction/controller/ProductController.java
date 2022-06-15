@@ -1,6 +1,7 @@
 package com.hanghae.auction.controller;
 
 import com.hanghae.auction.dto.ProductRequestDto;
+import com.hanghae.auction.dto.ResponseDto;
 import com.hanghae.auction.model.Product;
 import com.hanghae.auction.repository.ProductRepository;
 import com.hanghae.auction.security.UserDetailsImpl;
@@ -38,8 +39,8 @@ public class ProductController {
     }
 
     @DeleteMapping("/api/product/{pid}")
-    public Boolean deleteProduct(@PathVariable Long pid) {
-        return productService.deleteProduct(pid);
+    public ResponseDto deleteProduct(@PathVariable Long pid , @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return productService.deleteProduct(pid, userDetails);
     }
 
     @PutMapping("/api/product/{pid}")
