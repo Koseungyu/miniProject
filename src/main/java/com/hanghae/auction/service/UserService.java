@@ -17,18 +17,13 @@ public class UserService {
 
     public ResponseDto registerUser(SignupRequestDto requestDto) {
 
-//        ValidateChecker.registerValidCheck(requestDto);
-        ResponseDto responseDto = new ResponseDto();
-        Boolean result = true;
-        String err_msg = "사용가능한 ID 입니다.";
-        String username = requestDto.getUsername();
 
+        ResponseDto responseDto;
+        String username = requestDto.getUsername();
         Optional<Users> foundname = userRepository.findByUsername(username);
 
         if (foundname.isPresent()) {
-            err_msg = "중복된 ID가 존재합니다.";
-            result = false;
-            responseDto.setResult(false);
+            responseDto = new ResponseDto(false, "중복된 ID가 존재합니다.");
             return responseDto;
         }
 
@@ -37,6 +32,6 @@ public class UserService {
         Users user = new Users(username, password);
         userRepository.save(user);
 
-        return responseDto;
+        return new ResponseDto("회원가입 성공");
     }
 }
