@@ -45,12 +45,12 @@ public class TestDataRunner implements ApplicationRunner {
 
         // 테스트 User 의 관심상품 등록
         // 검색어 당 관심상품 10개 등록
-        createTestData(testUser, "에어팟1", 1022000L, "2020년에 산 것", "2022-06-20-18:00");
-        createTestData(testUser, "에어팟2", 1000000L, "2021년에 산 것", "2022-06-21-20:00");
-        createTestData(testUser, "에어팟프로", 120000L, "2022년에 산 것", "2022-06-21-18:00");
+        createTestData(testUser, "에어팟1", 100_000L, "2020년에 산 것", "2022-06-20-18:00");
+        createTestData(testUser, "에어팟2", 150_000L, "2021년에 산 것", "2022-06-21-20:00");
+        createTestData(testUser, "에어팟프로", 200_000L, "2022년에 산 것", "2022-06-21-18:00");
     }
 
-    private void createTestData(Users user, String searchWord, Long price, String description, String endtime) throws IOException {
+    private void createTestData(Users user, String searchWord, Long price, String description, String endtime) {
 
         ProductRequestDto requestDto = new ProductRequestDto("/static/images",  searchWord, price, description, endtime);
         Product product = new Product(requestDto, user);

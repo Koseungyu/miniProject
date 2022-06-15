@@ -28,7 +28,11 @@ public class BidService {
         Product product = productRepository.findById(pid).orElseThrow(() -> new NullPointerException("존재하지 않는 제품입니다."));
         Users user = userRepository.findById(uid).orElseThrow(() -> new NullPointerException("존재하지 않는 제품입니다."));
 
-        Bid bid = bidRepository.findById(1L).orElse(null);      // USER AND PRODUCT를 통해 해당 경매 검색 예정
+        Bid bid = bidRepository.findByUser(user);
+
+        if(product.getPrice() > price){
+            throw new IllegalArgumentException("기존 가격보다 적은 금액입니다.");
+        }
 
         if(bid == null){
             bid = new Bid(user, product, price);
@@ -36,6 +40,8 @@ public class BidService {
             bid.setPrice(price);
         }
 
+        product.setPrice(price);
+        Product savedProduct = productRepository.save(product);
         Bid savedBid = bidRepository.save(bid);
         return new BidPriceRequestDto(savedBid.getPrice());
     }
