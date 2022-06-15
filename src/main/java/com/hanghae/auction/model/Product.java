@@ -60,5 +60,4 @@ public class Product extends Timestamped{
 
         this.user = user;
     }
-
 }
