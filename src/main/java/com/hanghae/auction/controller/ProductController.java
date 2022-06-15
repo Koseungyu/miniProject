@@ -33,14 +33,14 @@ public class ProductController {
         return productService.getProduct(pid);
     }
 
-    @PostMapping("/api/product")
-    public Product createProduct(@RequestBody ProductRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-            return productService.createProduct(requestDto, userDetails);
+    @PostMapping("/api/product/{uid}")
+    public Product createProduct(@RequestBody ProductRequestDto requestDto, @PathVariable Long uid) {
+            return productService.createProduct(requestDto, uid);
     }
 
-    @DeleteMapping("/api/product/{pid}")
-    public ResponseDto deleteProduct(@PathVariable Long pid , @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return productService.deleteProduct(pid, userDetails);
+    @DeleteMapping("/api/product/{uid}")
+    public ResponseDto deleteProduct(@PathVariable Long pid , @PathVariable Long uid) {
+        return productService.deleteProduct(pid, uid);
     }
 
     @PutMapping("/api/product/{pid}")
