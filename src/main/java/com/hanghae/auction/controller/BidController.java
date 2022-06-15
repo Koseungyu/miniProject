@@ -25,4 +25,9 @@ public class BidController {
         return bidService.doBid(pid, uid, requestDto.getPrice());
     }
 
+
+    @GetMapping("/bid/{pid}")
+    public Long getBidCount(@PathVariable Long pid){
+        return bidService.getBidCount(pid);
+    }
 }

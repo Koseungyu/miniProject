@@ -33,13 +33,9 @@ public class Bid {
     @Column(nullable = false)
     private Long price;
 
-    @Column(nullable = false)
-    private Long count;
-
     public Bid(Users user, Product product, Long price) {
         this.user = user;
         this.product = product;
         this.price = price;
-        this.count = 0L;
     }
 }

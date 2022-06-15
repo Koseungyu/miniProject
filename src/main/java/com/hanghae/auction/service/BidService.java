@@ -8,7 +8,10 @@ import com.hanghae.auction.repository.BidRepository;
 import com.hanghae.auction.repository.ProductRepository;
 import com.hanghae.auction.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BidService {
@@ -30,7 +33,9 @@ public class BidService {
 
         Bid bid = bidRepository.findByUser(user);
 
-        if(product.getPrice() > price){
+        if(product.getPrice() >= price){
+            throw new IllegalArgumentException("기존 가격보다 적은 금액입니다.");
+        } else if(price % 100 != 0){
             throw new IllegalArgumentException("기존 가격보다 적은 금액입니다.");
         }
 
@@ -46,4 +51,10 @@ public class BidService {
         return new BidPriceRequestDto(savedBid.getPrice());
     }
 
+    public Long getBidCount(Long pid) {
+        Product product = productRepository.findById(pid).orElseThrow(() -> new NullPointerException("존재하지 않는 제품입니다."));
+        List<Bid> bid = bidRepository.findAllByProduct(product);
+        Long count = Long.valueOf(bid.size());
+        return count;
+    }
 }
