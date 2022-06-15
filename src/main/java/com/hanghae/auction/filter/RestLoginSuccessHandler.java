@@ -21,7 +21,7 @@ public class RestLoginSuccessHandler implements AuthenticationSuccessHandler {
     private UserRepository userRepository;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
@@ -36,9 +36,10 @@ public class RestLoginSuccessHandler implements AuthenticationSuccessHandler {
 
             if(user == null){
                 responseDto.setResult(false);
-                responseDto.setErr_msg("없는 회원입니다");
+                responseDto.setErr_msg("가입되지 않은 회원입니다");
             }else{
                 responseDto.setResult(true);
+                responseDto.setUsername(user.getUsername());
             }
         }
         OutputStream out = response.getOutputStream();

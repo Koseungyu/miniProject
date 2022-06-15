@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Autowired
     private RestLogoutSuccessHandler restLogoutSuccessHandler;
+
     @Override
     public void configure(WebSecurity web) {
         // h2-console 사용에 대한 허용 (CSRF, FrameOptions 무시)
@@ -45,8 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http
                 .cors()
-                .configurationSource(corsConfigurationSource());
-        //.ignoringAntMatchers("/user/**"); // 1개1개 직접 예외요청 적용
+                .configurationSource(corsConfigurationSource());        //.ignoringAntMatchers("/user/**"); // 1개1개 직접 예외요청 적용
 
         http.authorizeRequests()
                 .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Preflight Request 허용해주기

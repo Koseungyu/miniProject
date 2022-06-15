@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ResponseDto {
+    private String username;
     private boolean result;
     private String err_msg;
 
