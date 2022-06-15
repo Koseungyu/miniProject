@@ -12,8 +12,8 @@ public class ResponseDto {
     private boolean result;
     private String err_msg;
 
-    public ResponseDto(String err_msg) {
-        this.result = true;
+    public ResponseDto(Boolean result, String err_msg) {
+        this.result = result;
         this.err_msg = err_msg;
     }
 
