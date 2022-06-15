@@ -34,8 +34,8 @@ public class ProductService {
     }
 
     @Transactional
-    public ResponseDto deleteProduct(@PathVariable Long pid, UserDetailsImpl userDetails) {
-        Users user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(() -> new NullPointerException("존재하지 않은 사용자 ID입니다."));
+    public ResponseDto deleteProduct(@PathVariable Long pid, Long uid) {
+        Users user = userRepository.findById(uid).orElseThrow(() -> new NullPointerException("존재하지 않은 사용자 ID입니다."));
         Product product = productRepository.findById(pid).orElseThrow(() -> new NullPointerException("존재하지 않은 제품입니다."));
 
         productRepository.deleteById(pid);
@@ -43,8 +43,8 @@ public class ProductService {
     }
 
     @Transactional
-    public Product createProduct(@RequestBody ProductRequestDto requestDto, UserDetailsImpl userDetails) {
-        Users user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(() -> new NullPointerException("존재하지 않은 사용자 ID입니다."));
+    public Product createProduct(@RequestBody ProductRequestDto requestDto, Long uid) {
+        Users user = userRepository.findById(uid).orElseThrow(() -> new NullPointerException("존재하지 않은 사용자 ID입니다."));
         Product product = new Product(requestDto, user);
 
         String title= requestDto.getTitle();

@@ -44,10 +44,10 @@ public class RestLoginSuccessHandler implements AuthenticationSuccessHandler {
                 responseDto.setUsername(user.getUsername());
             }
         }
+
         OutputStream out = response.getOutputStream();
         ObjectMapper mapper = new ObjectMapper();
         mapper.writerWithDefaultPrettyPrinter().writeValue(out, responseDto);
         out.flush();
     }
-
 }
