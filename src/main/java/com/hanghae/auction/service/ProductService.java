@@ -6,14 +6,13 @@ import com.hanghae.auction.model.Users;
 import com.hanghae.auction.repository.ProductRepository;
 import com.hanghae.auction.repository.UserRepository;
 import com.hanghae.auction.security.UserDetailsImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
-import java.util.Date;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -29,9 +28,8 @@ public class ProductService {
 
     @Transactional
     public Product getProduct(@PathVariable Long pid) {
-        Product product =  productRepository.findById(pid).orElseThrow(
+        return productRepository.findById(pid).orElseThrow(
                 ()->new IllegalArgumentException("productId가 존재하지 않습니다."));
-        return product;
     }
 
     @Transactional
@@ -70,5 +68,9 @@ public class ProductService {
 
         product.setStatus(false);
         return productRepository.save(product);
+    }
+
+    public List<Product> getThumbnail() {
+        return productRepository.findAllByOrderByCreatedAtDesc();
     }
 }
