@@ -6,41 +6,45 @@ import com.hanghae.auction.repository.ProductRepository;
 import com.hanghae.auction.security.UserDetailsImpl;
 import com.hanghae.auction.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductRepository productRepository;
     private final ProductService productService;
+
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/api/product")
     public List<Product> getThumbnail() {
-        return ProductRepository.findAllByOrderByCreatedAtDesc();
+        return productService.getThumbnail();
     }
 
     @GetMapping("/api/product/{pid}")
     public Product getProduct(@PathVariable Long pid) {
-        return ProductService.getProduct(pid);
+        return productService.getProduct(pid);
     }
 
     @PostMapping("/api/product")
     public Product createProduct(@RequestBody ProductRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-            return ProductService.createProduct(requestDto, userDetails);
+            return productService.createProduct(requestDto, userDetails);
     }
 
     @DeleteMapping("/api/product/{pid}")
     public Boolean deleteProduct(@PathVariable Long pid) {
-        return ProductService.deleteProduct(pid);
+        return productService.deleteProduct(pid);
     }
 
     @PutMapping("/api/product/{pid}")
     public Product changeStatus(@PathVariable Long pid) {
-        return ProductService.changeStatus(pid);
+        return productService.changeStatus(pid);
     }
 
 }
