@@ -1,6 +1,7 @@
 package com.hanghae.auction.controller;
 
 
+import com.hanghae.auction.dto.BidCountResponseDto;
 import com.hanghae.auction.dto.BidPriceRequestDto;
 import com.hanghae.auction.service.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class BidController {
 
 
     @GetMapping("/bid/{pid}")
-    public Long getBidCount(@PathVariable Long pid){
+    public BidCountResponseDto getBidCount(@PathVariable Long pid){
         return bidService.getBidCount(pid);
     }
 }

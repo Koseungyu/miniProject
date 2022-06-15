@@ -1,5 +1,6 @@
 package com.hanghae.auction.service;
 
+import com.hanghae.auction.dto.BidCountResponseDto;
 import com.hanghae.auction.dto.BidPriceRequestDto;
 import com.hanghae.auction.model.Bid;
 import com.hanghae.auction.model.Product;
@@ -51,10 +52,9 @@ public class BidService {
         return new BidPriceRequestDto(savedBid.getPrice());
     }
 
-    public Long getBidCount(Long pid) {
+    public BidCountResponseDto getBidCount(Long pid) {
         Product product = productRepository.findById(pid).orElseThrow(() -> new NullPointerException("존재하지 않는 제품입니다."));
         List<Bid> bid = bidRepository.findAllByProduct(product);
-        Long count = Long.valueOf(bid.size());
-        return count;
+        return new BidCountResponseDto(bid.size());
     }
 }
