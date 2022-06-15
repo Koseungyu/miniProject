@@ -1,5 +1,7 @@
 package com.hanghae.auction.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hanghae.auction.dto.ProductRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,7 @@ public class Product extends Timestamped{
     private Long pid;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="USER_ID")
     private Users user;
 
