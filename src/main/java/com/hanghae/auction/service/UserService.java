@@ -37,8 +37,6 @@ public class UserService {
         Users user = new Users(username, password);
         userRepository.save(user);
 
-        ResponseDto responseDto = new ResponseDto(result, err_msg);
-
         return responseDto;
     }
 }
