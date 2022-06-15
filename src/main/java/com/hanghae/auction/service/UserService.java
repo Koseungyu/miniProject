@@ -16,8 +16,6 @@ public class UserService {
     private final UserRepository userRepository;
 
     public ResponseDto registerUser(SignupRequestDto requestDto) {
-
-
         ResponseDto responseDto;
         String username = requestDto.getUsername();
         Optional<Users> foundname = userRepository.findByUsername(username);
