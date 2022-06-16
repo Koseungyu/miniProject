@@ -37,7 +37,7 @@ public class ProductController {
             return productService.createProduct(requestDto, uid);
     }
 
-    @DeleteMapping("/api/product/{uid}")
+    @DeleteMapping("/api/product/{pid}/{uid}")
     public ResponseDto deleteProduct(@PathVariable Long pid , @PathVariable Long uid) {
         return productService.deleteProduct(pid, uid);
     }
