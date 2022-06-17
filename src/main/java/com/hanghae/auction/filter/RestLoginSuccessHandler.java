@@ -28,6 +28,7 @@ public class RestLoginSuccessHandler implements AuthenticationSuccessHandler {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
+//        response.addHeader("JSESSIONID",httpSession.getId());
         response.setStatus(HttpServletResponse.SC_OK);
         response.setHeader("Access-Control-Allow-Headers",
                 "Date, Content-Type, Accept, X-Requested-With, Authorization, From, X-Auth-Token, Request-Id");
