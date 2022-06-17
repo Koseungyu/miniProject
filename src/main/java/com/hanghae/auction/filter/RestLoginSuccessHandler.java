@@ -5,6 +5,7 @@ import com.hanghae.auction.dto.ResponseDto;
 import com.hanghae.auction.model.Users;
 import com.hanghae.auction.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -28,6 +29,11 @@ public class RestLoginSuccessHandler implements AuthenticationSuccessHandler {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
+        response.setHeader("Access-Control-Allow-Headers",
+                "Date, Content-Type, Accept, X-Requested-With, Authorization, From, X-Auth-Token, Request-Id");
+        response.setHeader("Access-Control-Expose-Headers", "Set-Cookie");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
 
         ResponseDto responseDto = new ResponseDto();
 
@@ -49,5 +55,6 @@ public class RestLoginSuccessHandler implements AuthenticationSuccessHandler {
         ObjectMapper mapper = new ObjectMapper();
         mapper.writerWithDefaultPrettyPrinter().writeValue(out, responseDto);
         out.flush();
+
     }
 }
